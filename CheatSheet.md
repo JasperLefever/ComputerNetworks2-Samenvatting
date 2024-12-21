@@ -153,3 +153,13 @@ Switch(config-if)# ip address <ip address> <subnet mask>
 Switch(config-if)# end
 Switch# copy running-config startup-config
 ```
+
+## Enable ipv6 routing
+
+```bash
+Router> enable
+Router# configure terminal
+Router(config)# ipv6 unicast-routing
+Router(config)# end
+Router# copy running-config startup-config
+```
