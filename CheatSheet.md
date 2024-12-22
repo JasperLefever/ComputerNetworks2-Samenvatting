@@ -20,6 +20,7 @@ Switch# show interfaces
 Switch# show interfaces <interface>
 Switch# show ipv6 interface brief
 Switch# show ip route
+Switch# show ip route static
 Switch# show ipv6 route
 Switch# show vlan
 Switch# show vlan brief
@@ -160,6 +161,60 @@ Switch# copy running-config startup-config
 Router> enable
 Router# configure terminal
 Router(config)# ipv6 unicast-routing
+Router(config)# end
+Router# copy running-config startup-config
+```
+
+## Static Routes
+
+On directly connected networks use the exit interface as the next-hop option.
+
+### ipv4
+
+```bash
+Router> enable
+Router# configure terminal
+Router(config)# ip route <destination network> <subnet mask> <next-hop ip address> | <exit interface>
+# Fully specified route
+#Router(config)# ip route <destination network> <subnet mask> <interface> <next-hop ip address>
+Router(config)# end
+Router# copy running-config startup-config
+```
+
+### ipv6
+
+```bash
+Router> enable
+Router# configure terminal
+Router# ipv6 unicast-routing
+Router(config)# ipv6 route <destination network>/<prefix length> <next-hop ip address> | <exit interface>
+Router(config)# end
+```
+
+## Default Static Routes
+
+```bash
+Router> enable
+Router# configure terminal
+Router(config)# ip route 0.0.0.0 0.0.0.0 <next-hop ip address> | <exit interface>
+Router(config)# end
+Router# copy running-config startup-config
+```
+
+```bash
+Router> enable
+Router# configure terminal
+Router(config)# ipv6 route ::/0 <next-hop ip address> | <exit interface>
+Router(config)# end
+Router# copy running-config startup-config
+```
+
+## Floating Static Routes
+
+```bash
+Router> enable
+Router# configure terminal
+Router(config)# ip route <destination network> <subnet mask> <next-hop ip address> <administrative distance mostly 5>
 Router(config)# end
 Router# copy running-config startup-config
 ```
