@@ -27,3 +27,7 @@
 ## Module 15: IP Static Routing
 
 ## Module 16: Troubleshoot static and default routes
+
+-> Does not contain anything new
+
+![alt text](image.png)
