@@ -256,11 +256,53 @@ Switch(config-if)# switchport trunk allowed vlan <vlan number>
 Switch(config-if)# end
 ```
 
-### Delete VLAN
+#### Delete VLAN
 
 ```bash
 Switch> enable
 Switch# configure terminal
 Switch(config)# no vlan <vlan number>
+Switch(config)# end
+```
+
+### Router
+
+#### Assign VLAN to subinterface
+
+```bash
+Router> enable
+Router# configure terminal
+Router(config)# interface <interface>.<vlan number>
+Router(config-subif)# description <description>
+Router(config-subif)# no shutdown
+Router(config-subif)# encapsulation dot1Q <vlan number>
+Router(config-subif)# ip address <ip address> <subnet mask>
+Router(config-subif)# end
+```
+
+### Layer 3 Switch
+
+#### Assign VLAN to SVI
+
+```bash
+Switch> enable
+Switch# configure terminal
+Switch(config)# interface vlan <vlan number>
+Switch(config-if)# description <description>
+Switch(config-if)# ip address <ip address> <subnet mask>
+Switch(config-if)# no shutdown
+Switch(config-if)# end
+```
+
+#### Routing configuration to other Layer 3 Device
+
+```bash
+Switch> enable
+Switch# configure terminal
+Switch(config)# interface <interface>
+Switch(config-if)# no switchport
+Switch(config-if)# ip address <ip address> <subnet mask>
+Switch(config-if)# end
+Switch(config)# ip route <destination network> <subnet mask> <next-hop ip address> | <exit interface>
 Switch(config)# end
 ```
