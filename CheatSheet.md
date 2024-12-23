@@ -218,3 +218,49 @@ Router(config)# ip route <destination network> <subnet mask> <next-hop ip addres
 Router(config)# end
 Router# copy running-config startup-config
 ```
+
+## VLAN Config
+
+### Switch
+
+#### Create VLAN
+
+```bash
+Switch> enable
+Switch# configure terminal
+Switch(config)# vlan <vlan number>
+Switch(config-vlan)# name <vlan name>
+Switch(config-vlan)# end
+```
+
+#### Assign VLAN to Interface
+
+```bash
+Switch> enable
+Switch# configure terminal
+Switch(config)# interface <interface>
+Switch(config-if)# switchport mode access
+Switch(config-if)# switchport access vlan <vlan number>
+Switch(config-if)# end
+```
+
+#### Assign VLAN to Trunk
+
+```bash
+Switch> enable
+Switch# configure terminal
+Switch(config)# interface <interface>
+Switch(config-if)# switchport mode trunk
+Switch(config-if)# switchport trunk native vlan <native vlan number>
+Switch(config-if)# switchport trunk allowed vlan <vlan number>
+Switch(config-if)# end
+```
+
+### Delete VLAN
+
+```bash
+Switch> enable
+Switch# configure terminal
+Switch(config)# no vlan <vlan number>
+Switch(config)# end
+```
