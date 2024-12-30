@@ -91,7 +91,7 @@ STP per VLAN:
 - Each VLAN has its own STP instance
 - Each VLAN has its own root bridge
 
-https://www.youtube.com/watch?v=6MW5P6Ci7lw
+https://www.youtube.com/watch?v=japdEY1UKe4
 
 ## Evolution of STP
 

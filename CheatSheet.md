@@ -26,6 +26,9 @@ Switch# show vlan
 Switch# show vlan brief
 Switch# show interfaces trunk
 Switch# show interfaces status
+Switch# show etherchannel summary
+Switch# show etherchannel port-channel
+Switch# show interfaces port-channel <number>
 ```
 
 ## SVI Configuration
@@ -305,4 +308,18 @@ Switch(config-if)# ip address <ip address> <subnet mask>
 Switch(config-if)# end
 Switch(config)# ip route <destination network> <subnet mask> <next-hop ip address> | <exit interface>
 Switch(config)# end
+```
+
+## EtherChannel with LACP
+
+```bash
+Switch> enable
+Switch# configure terminal
+Switch(config)# interface range <interface1> - <interface2>
+Switch(config-if-range)# channel-group <number> mode active
+Switch(config-if-range)# exit
+Switch(config)# interface port-channel <number>
+Switch(config-if)# description <description>
+Switch(config-if)# no shutdown
+## All other configurations like VLAN, IP, etc.
 ```
