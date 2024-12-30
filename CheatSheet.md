@@ -31,6 +31,7 @@ Switch# show etherchannel port-channel
 Switch# show interfaces port-channel <number>
 Switch# show ip dhcp binding
 Switch# show ip dhcp server statistics
+Switch# show ipv6 dhcp pool
 ```
 
 ## SVI Configuration
@@ -360,4 +361,69 @@ Router# configure terminal
 Router(config)# interface <interface>
 Router(config-if)# ip address dhcp
 Router(config-if)# end
+```
+
+## DHCPv6
+
+### Stateless DHCPv6 server
+
+```bash
+Router> enable
+Router# configure terminal
+Router(config)# ipv6 unicast-routing
+Router(config)# ipv6 dhcp pool <pool name>
+Router(config-dhcp)# dns-server <dns server>
+Router(config-dhcp)# domain-name <domain name>
+Router(config-dhcp)# ipv6 dhcp server <pool name>
+Router(config-dhcp)# ipv6 nd other-config-flag
+Router(config-dhcp)# end
+```
+
+### Stateless DHCPv6 client
+
+```bash
+Router> enable
+Router# configure terminal
+Router# ipv6 unicast-routing
+Router(config)# interface <interface>
+Router(config-if)# ipv6 enable
+Router(config-if)# ipv6 address autoconfig
+Router(config-if)# end
+```
+
+### Stateful DHCPv6 server
+
+```bash
+Router> enable
+Router# configure terminal
+Router(config)# ipv6 unicast-routing
+Router(config)# ipv6 dhcp pool <pool name>
+Router(config-dhcp)# address prefix <prefix> <prefix length>
+Router(config-dhcp)# dns-server <dns server>
+Router(config-dhcp)# domain-name <domain name>
+Router(config-dhcp)# ipv6 dhcp server <pool name>
+Router(config-dhcp)# ipv6 nd managed-config-flag
+Router(config-dhcp)# ipv6 nd prefix default no-autoconfig
+Router(config-dhcp)# end
+```
+
+### Stateful DHCPv6 client
+
+```bash
+Router> enable
+Router# configure terminal
+Router# ipv6 unicast-routing
+Router(config)# interface <interface>
+Router(config-if)# ipv6 enable
+Router(config-if)# ipv6 address dhcp
+Router(config-if)# end
+```
+
+### DHCPv6 Relay
+
+```bash
+Router> enable
+Router# configure terminal
+Router(config)# interface <interface>
+Router(config-if)# ipv6 dhcp relay destination <ip address of DHCP server> <interface>
 ```
