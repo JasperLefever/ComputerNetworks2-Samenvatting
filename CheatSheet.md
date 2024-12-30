@@ -29,6 +29,8 @@ Switch# show interfaces status
 Switch# show etherchannel summary
 Switch# show etherchannel port-channel
 Switch# show interfaces port-channel <number>
+Switch# show ip dhcp binding
+Switch# show ip dhcp server statistics
 ```
 
 ## SVI Configuration
@@ -322,4 +324,40 @@ Switch(config)# interface port-channel <number>
 Switch(config-if)# description <description>
 Switch(config-if)# no shutdown
 ## All other configurations like VLAN, IP, etc.
+```
+
+## DHCPv4
+
+```bash
+Router> enable
+Router# configure terminal
+Router(config)# ip dhcp excluded-address <start ip address> <end ip address>
+### Create new pool
+Router(config)# ip dhcp pool <pool name>
+Router(dhcp-config)# network <network> <subnet mask>
+Router(dhcp-config)# default-router <default gateway>
+Router(dhcp-config)# dns-server <dns server>
+##Router(dhcp-config)# domain-name <domain name>
+Router(dhcp-config)# lease <days> <hours> <minutes>
+##Router(dhcp-config)# netbios-name-server <netbios server>
+```
+
+### DHCPv4 Relay
+
+```bash
+Router> enable
+Router# configure terminal
+Router(config)# interface <interface>
+Router(config-if)# ip helper-address <ip address of DHCP server>
+Router(config-if)# end
+```
+
+### DHCPv4 Client
+
+```bash
+Router> enable
+Router# configure terminal
+Router(config)# interface <interface>
+Router(config-if)# ip address dhcp
+Router(config-if)# end
 ```
