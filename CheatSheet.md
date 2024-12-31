@@ -32,6 +32,7 @@ Switch# show interfaces port-channel <number>
 Switch# show ip dhcp binding
 Switch# show ip dhcp server statistics
 Switch# show ipv6 dhcp pool
+Switch# show standby brief
 ```
 
 ## SVI Configuration
@@ -426,4 +427,24 @@ Router> enable
 Router# configure terminal
 Router(config)# interface <interface>
 Router(config-if)# ipv6 dhcp relay destination <ip address of DHCP server> <interface>
+```
+
+## HSRP Configuration
+
+Active router
+
+```bash
+R1(config)# interface g0/0/1
+R1(config-if)# standby version 2
+R1(config-if)# standby 1 ip 172.16.10.1
+R1(config-if)# standby 1 priority 150
+R1(config-if)# standby 1 preempt
+```
+
+Standby router
+
+```bash
+R2(config)# interface g0/0/1
+R2(config-if)# standby version 2
+R2(config-if)# standby 1 ip 172.16.10.1
 ```
